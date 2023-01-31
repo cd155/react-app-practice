@@ -161,8 +161,7 @@ function calWin(row, column, squares) {
     const lines = winLines(row, column);
     var isSame = null;
     for (let i = 0; i < lines.length; i++) {
-        var firstEle = lines[i][0];
-        var valueFirstEle = squares[firstEle[0]][firstEle[1]]
+        let valueFirstEle = squares[(lines[i][0])[0]][(lines[i][0])[1]]
         if (valueFirstEle) {
             isSame = lines[i].every(ele => squares[ele[0]][ele[1]] === valueFirstEle);
             if (isSame) {
