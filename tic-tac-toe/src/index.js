@@ -88,7 +88,7 @@ class Game extends React.Component {
 
     render() {
         const history = this.state.history;
-        const moves = history.map((step, index) => {
+        const moves = history.map((_, index) => {
             const desc = index ? // if (0) is false
                 'Go to move #' + index :
                 'Go to game start';
@@ -129,8 +129,8 @@ class Game extends React.Component {
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<Game 
-                row={3} 
-                column={3}
+                row={5} 
+                column={5}
             />);
 
 function createMarix(row, column) {
