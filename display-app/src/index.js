@@ -9,6 +9,8 @@ var data = {
 
 var keys = Object.keys(data)
 
+var testApi = fetch("https://api.publicapis.org/entries")
+
 class ShopList extends React.Component {
     render() {
         var grid = [];
@@ -30,6 +32,10 @@ class ShopList extends React.Component {
                     <th>Image</th>
                 </tr>
                 {grid}
+                <tr> 
+                    <th>API length</th>
+                    <th>{testApi.length}</th>
+                </tr>
             </tbody>
         </table>
         );
