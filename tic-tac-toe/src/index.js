@@ -147,8 +147,8 @@ class Inputs extends React.Component {
     }
 
     handleSubmit(event){
-        alert('A name was submitted: ' + this.state.row + this.state.column );
-        console.log("handleClick")
+        this.props.onClick(this.state.row, this.state.column)
+        event.preventDefault();
     }
 
     render(){
@@ -178,29 +178,35 @@ class App extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            row: 5,
-            column: 5,
+            row: 4,
+            column: 4
         }
     }
 
-    handleClick() {
-        // this.setState({
-        //     row: 4,
-        //     column: 4,
-        // });
-        console.log("handleClick")
+    handleClick(i, j) {
+        console.log(i,j)
+        this.setState({
+            row: i,
+            column: j
+        });
     }
 
     render() {
         return (
-            [<Inputs 
-                onClick={() => this.handleClick()}
-            />,
-            <br />,
-            <Game 
-                row={this.state.row} 
-                column={this.state.column}
-            />]
+            [
+                <Inputs 
+                    key = "1"
+                    onClick={(i, j) => this.handleClick(i, j)}
+                />,
+                <br                 
+                    key = "2"           
+                />,
+                <Game 
+                    key = "3"
+                    row={this.state.row} 
+                    column={this.state.column}
+                />
+            ]
         )
     }
 }
