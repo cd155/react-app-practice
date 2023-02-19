@@ -125,13 +125,92 @@ class Game extends React.Component {
     }
 }
 
+class Inputs extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            row: 3,
+            column: 3
+        }
+
+        this.handleRowChange = this.handleRowChange.bind(this);
+        this.handleColumnChange = this.handleColumnChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleRowChange(event) {
+        this.setState({row: event.target.value});
+    }
+
+    handleColumnChange(event) {
+        this.setState({column: event.target.value});
+    }
+
+    handleSubmit(event){
+        alert('A name was submitted: ' + this.state.row + this.state.column );
+        console.log("handleClick")
+    }
+
+    render(){
+        return (
+            <form onSubmit={this.handleSubmit}>
+                <label>Choose m*n matrix for your tic tac toe games</label>
+                <br />
+                <br />
+                <label>
+                    Row:
+                    <input type="number" name="row" value={this.state.row}
+                    onChange={this.handleRowChange}/>
+                </label>
+                <label>
+                    Column:
+                    <input type="number" name="column" value={this.state.column}
+                    onChange={this.handleColumnChange}/>
+                </label>
+                <br />
+                <input type="submit" value="Submit" />
+            </form>
+        )
+    }
+}
+
+class App extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            row: 5,
+            column: 5,
+        }
+    }
+
+    handleClick() {
+        // this.setState({
+        //     row: 4,
+        //     column: 4,
+        // });
+        console.log("handleClick")
+    }
+
+    render() {
+        return (
+            [<Inputs 
+                onClick={() => this.handleClick()}
+            />,
+            <br />,
+            <Game 
+                row={this.state.row} 
+                column={this.state.column}
+            />]
+        )
+    }
+}
+
 // ========================================
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<Game 
-                row={5} 
-                column={5}
-            />);
+root.render (        
+    <App />
+);
 
 function createMarix(row, column) {
     var matrix = Array(row).fill(null);
