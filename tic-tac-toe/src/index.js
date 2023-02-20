@@ -55,39 +55,28 @@ class Board extends React.Component {
 class Game extends React.Component {
     constructor(props){
         super(props);
-        this.state = {
-            history: [createMarix(props.row,props.column)],
-            xIsNext: true,
-            step: 0,
-        }
     }
     
     // handle update when user click the button
     handleClick(i, j) {
-        const history = this.state.history.slice(0, this.state.step + 1)
+        const history = this.props.history.slice(0, this.props.step + 1)
         const currentS = (history[history.length -1]);
         const squares = copyArrOfArr(currentS);
         if(calWin(this.props.row, this.props.column, squares) || 
            squares[i][j]) {
             return;
         }
-        squares[i][j] = this.state.xIsNext ? 'X' : 'O';
-        this.setState({
-            history: history.concat([squares]),
-            xIsNext: !this.state.xIsNext,
-            step: history.length,
-        });
+        squares[i][j] = this.props.xIsNext ? 'X' : 'O';
+
+        this.props.onClick(history.concat([squares]), !this.props.xIsNext, history.length);
     }
 
     jumpTo(index){
-        this.setState({  
-            step: index,
-            xIsNext: (index % 2) === 0,
-        });
+        this.props.onClick(this.props.history, (index % 2) === 0, index);
     }
 
     render() {
-        const history = this.state.history;
+        const history = this.props.history;
         const moves = history.map((_, index) => {
             const desc = index ? // if (0) is false
                 'Go to move #' + index :
@@ -99,9 +88,9 @@ class Game extends React.Component {
             );
         });
 
-        const currentS = history[this.state.step];
+        const currentS = history[this.props.step];
         const win = calWin(this.props.row, this.props.column, currentS);
-        var status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O')
+        var status = 'Next player: ' + (this.props.xIsNext ? 'X' : 'O')
         if (win) {
             status = 'Winner: ' + win;
         }
@@ -178,16 +167,29 @@ class App extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            row: 4,
-            column: 4
+            row: 3,
+            column: 3,
+            history: [createMarix(3,3)],
+            xIsNext: true,
+            step: 0,
         }
     }
 
-    handleClick(i, j) {
-        console.log(i,j)
+    handleSubmit(i, j) {
         this.setState({
             row: i,
-            column: j
+            column: j,
+            history: [createMarix(i,j)],
+            xIsNext: true,
+            step: 0,
+        });
+    }
+
+    handleClickOnGame(h, x, s) {
+        this.setState({
+            history: h,
+            xIsNext: x,
+            step: s,
         });
     }
 
@@ -196,7 +198,7 @@ class App extends React.Component {
             [
                 <Inputs 
                     key = "1"
-                    onClick={(i, j) => this.handleClick(i, j)}
+                    onClick={(i, j) => this.handleSubmit(i, j)}
                 />,
                 <br                 
                     key = "2"           
@@ -205,6 +207,10 @@ class App extends React.Component {
                     key = "3"
                     row={this.state.row} 
                     column={this.state.column}
+                    history={this.state.history}
+                    xIsNext={this.state.xIsNext}
+                    step={this.state.step}
+                    onClick={(h, x, s) => this.handleClickOnGame(h, x, s)}
                 />
             ]
         )
@@ -276,8 +282,9 @@ function winLinesVer(row, column) {
 }
 
 function calWin(row, column, squares) {
-    const lines = winLines(row, column);
+    console.log(squares)
 
+    const lines = winLines(row, column);
     var isSame = null;
     for (let i = 0; i < lines.length; i++) {
         let valueFirstEle = squares[(lines[i][0])[0]][(lines[i][0])[1]]
