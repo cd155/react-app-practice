@@ -9,9 +9,30 @@ var data = {
 
 var keys = Object.keys(data)
 
-var testApi = fetch("https://api.publicapis.org/entries")
-
 class ShopList extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            entries: []
+        }
+    }
+
+    componentDidMount(){
+        fetch("https://api.publicapis.org/entries")
+        .then((response) => response.json())
+        .then((data) => {
+            this.setState({entries: data.entries});
+            },
+            (error) => {
+                alert(error);
+            }
+        )    
+    }
+
+    create_api_grid(){
+        
+    }
+
     render() {
         var grid = [];
         for (let i = 0; i < keys.length; i++) {
@@ -25,17 +46,28 @@ class ShopList extends React.Component {
         }
 
         return (
-        <table className="shoplist">
+        <table className="shop_list">
             <tbody>
                 <tr> 
                     <th>Name</th>
                     <th>Image</th>
                 </tr>
                 {grid}
+            </tbody>
+            <tbody>
                 <tr> 
-                    <th>API length</th>
-                    <th>{testApi.length}</th>
+                    <th>API</th>
+                    <th>Description</th>
+                    <th>Link</th>
                 </tr>
+                {this.state.entries.map((entry,index) =>
+                    <Entry
+                        key={index}
+                        api_name={entry.API}
+                        description={entry.Description}
+                        url_link={entry.Link}
+                    />
+                )}
             </tbody>
         </table>
         );
@@ -53,8 +85,20 @@ class Item extends React.Component {
     }
 }
 
+class Entry extends React.Component {
+    render() {
+        return (
+            <tr> 
+                <td>{this.props.api_name}</td>
+                <td>{this.props.description}</td>
+                <td>{this.props.url_link}</td>
+            </tr>
+        )
+    }
+}
+
 // ========================================
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<ShopList 
-                name={"test"}
+                name={"test_list"}
             />);
