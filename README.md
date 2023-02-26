@@ -6,4 +6,12 @@ The purpose of this repo is to practice react and javascript.
 
 <img width="480" src="https://user-images.githubusercontent.com/16947266/220005114-984a2678-5211-4339-b1f9-d6940be7bc2e.gif">
 
-2. display items 
+2. display items
+
+Display a list with hard-coded data: 
+
+<img width="400" src="https://user-images.githubusercontent.com/16947266/221434152-d6e95782-8c54-485c-8ea6-ab867411f343.png">
+
+Display a list with fetch API data: 
+
+<img src = "https://user-images.githubusercontent.com/16947266/221434210-37fd45f9-7e99-4e2a-a670-0d9a26d7b520.png">
