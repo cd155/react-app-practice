@@ -29,10 +29,6 @@ class ShopList extends React.Component {
         )    
     }
 
-    create_api_grid(){
-        
-    }
-
     render() {
         var grid = [];
         for (let i = 0; i < keys.length; i++) {
@@ -60,14 +56,16 @@ class ShopList extends React.Component {
                     <th>Description</th>
                     <th>Link</th>
                 </tr>
-                {this.state.entries.map((entry,index) =>
-                    <Entry
-                        key={index}
-                        api_name={entry.API}
-                        description={entry.Description}
-                        url_link={entry.Link}
-                    />
-                )}
+                {
+                    this.state.entries.map((entry,index) =>
+                        <Entry
+                            key={index}
+                            api_name={entry.API}
+                            description={entry.Description}
+                            url_link={entry.Link}
+                        />
+                    )
+                }
             </tbody>
         </table>
         );
