@@ -8,11 +8,15 @@ const createDigits = () => {
     for (let i = 1; i < 10; i++) {
         digits.push(i);
     }
-
+    digits.push(0)
+    digits.push(".")
+    digits.push("=")
     return digits;
 }
 
-const digits = createDigits();
+const digVals = createDigits();
+
+const funVals = ['/','x','-', '+', 'DEL'];
 
 class App extends React.Component {
     render() {
@@ -24,23 +28,23 @@ class App extends React.Component {
                     </div>
 
                     <div className="operators">
-                        <button>/</button>
-                        <button>x</button>
-                        <button>-</button>
-                        <button>+</button>
-
-                        <button>DEL</button>
+                        {
+                            funVals.map((val,i) => 
+                                <button key = {i} 
+                                        onClick={() => {console.log(`${val} clicked!`);}}
+                                >{val}</button>
+                            )
+                        }
                     </div>
 
                     <div className="digits">
                         {
-                            digits.map((val,i) => 
-                                <button key = {i} >{val}</button>
+                            digVals.map((val,i) => 
+                                <button key = {i} 
+                                        onClick={() => {console.log(`${val} clicked!`);}}
+                                >{val}</button>
                             )
                         }
-                        <button >0</button>
-                        <button >.</button>
-                        <button >=</button>
                     </div>
                 </div>
 		    </div>
