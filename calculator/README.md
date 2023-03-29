@@ -11,6 +11,12 @@ The user interface will be designed to be intuitive and user-friendly. It will b
 ## Arithmetic Module:
 The arithmetic operations module will handle the actual mathematical operations. It will be responsible for performing addition, subtraction, multiplication, and division. It will also be responsible for handling the order of operations and dealing with negative numbers.
 
+## Auxiliary Information
+- Data Structure:
+    1. Stack: The stack data structure can be used to handle the order of operations. The stack will store the numbers and mathematical operations in the order they are entered.
+    2. Queue: The queue data structure can be used to store and retrieve input from the user.
+- Input Validation: The calculator software will validate user input to prevent errors and ensure that the input is within the range of valid values. The software will check that the input is a valid number, that the mathematical operation selected is valid, and that the input does not result in division by zero.
+
 ## Requirement Check List
 
 1. [] The calculator should have a browser-based user interface (ie it can be opened using a web browser)
