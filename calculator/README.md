@@ -28,8 +28,8 @@ The arithmetic operations module will handle the actual mathematical operations.
 7. [ ] The calculator should have a way to log in with username and password
 8. [x] The calculator should be usable with or without authentication
 9. [ ] The calculator should have a navigation bar or panel which displays the user’s authentication status
-10. [] The calculator should have the following features
-    - [] Memory functions (M+, M-, MR, MC)
+10. [ ] The calculator should have the following features
+    - [ ] Memory functions (M+, M-, MR, MC)
     - [x] Percentage function (%)
     - [x] Square root function (√)
     - [x] Exponential function (^)
