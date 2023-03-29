@@ -10,7 +10,6 @@ const createDigits = () => {
     }
     digits.push(0)
     digits.push(".")
-    digits.push("=")
     return digits;
 }
 
@@ -19,6 +18,15 @@ const digVals = createDigits();
 const funVals = ['/','x','-', '+', 'DEL'];
 
 class App extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            nums  : [[]],
+            sign  : [],
+            result:  0
+        }
+    }
+
     render() {
         return(
             <div className="App">
@@ -31,7 +39,11 @@ class App extends React.Component {
                         {
                             funVals.map((val,i) => 
                                 <button key = {i} 
-                                        onClick={() => {console.log(`${val} clicked!`);}}
+                                        onClick={() => {
+                                            this.state.sign.push(val);
+                                            this.state.nums.push([])
+                                            console.log(this.state.sign, this.state.nums);
+                                        }}
                                 >{val}</button>
                             )
                         }
@@ -41,10 +53,16 @@ class App extends React.Component {
                         {
                             digVals.map((val,i) => 
                                 <button key = {i} 
-                                        onClick={() => {console.log(`${val} clicked!`);}}
+                                        onClick={() => {
+                                            this.state.nums[this.state.nums.length - 1].push(val)
+                                            console.log(this.state.nums);
+                                        }}
                                 >{val}</button>
                             )
                         }
+                        <button 
+                            onClick={() => {console.log(`= clicked!`);}} 
+                        >=</button>
                     </div>
                 </div>
 		    </div>
