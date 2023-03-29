@@ -19,13 +19,18 @@ The arithmetic operations module will handle the actual mathematical operations.
 
 ## Requirement Check List
 
-1. [] The calculator should have a browser-based user interface (ie it can be opened using a web browser)
-2. [] The calculator should have a number pad with digits 0-9 and decimal point.
-3. [] The calculator should have buttons for addition, subtraction, multiplication, and division.
-4. [] The calculator should have a display that shows the input and the result of the calculation.
+1. [x] The calculator should have a browser-based user interface (ie it can be opened using a web browser)
+2. [x] The calculator should have a number pad with digits 0-9 and decimal point.
+3. [x] The calculator should have buttons for addition, subtraction, multiplication, and division.
+4. [x] The calculator should have a display that shows the input and the result of the calculation.
 5. [] The calculator should follow the order of operations (PEMDAS).
 6. [] The calculator should have a way to sign up with a username and password
 7. [] The calculator should have a way to log in with username and password
-8. [] The calculator should be usable with or without authentication
+8. [x] The calculator should be usable with or without authentication
 9. [] The calculator should have a navigation bar or panel which displays the user’s authentication status
-10. [] The calculator should have the following features 
+10. [] The calculator should have the following features
+    - [] Memory functions (M+, M-, MR, MC)
+    - [x] Percentage function (%)
+    - [x] Square root function (√)
+    - [x] Exponential function (^)
+    - [] History function
