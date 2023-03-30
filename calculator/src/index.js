@@ -9,13 +9,12 @@ const createDigits = () => {
         digits.push(i);
     }
     digits.push(0)
-    digits.push(".")
     return digits;
 }
 
 const digVals = createDigits();
 
-const funVals = ['/','x','-', '+'];
+const funVals = ['/','x','-', '+', '%', '√', '^'];
 
 class App extends React.Component {
     constructor(props) {
@@ -134,6 +133,9 @@ class App extends React.Component {
                             )
                         }
                         <button 
+                            onClick={() => {console.log(". clicked");}} 
+                        >.</button>
+                        <button 
                             onClick={() => {this.handleEqualClick(this.state.nums, this.state.sign);}} 
                         >=</button>
                     </div>
@@ -176,7 +178,12 @@ function evalEqual(digs, op){
             res = res - evaluate(digs[digCount])
         else if (op[opCount]==="+")
             res = res + evaluate(digs[digCount])
-        
+        else if (op[opCount]==="%")
+            res = res * 100
+        else if (op[opCount]==="√")
+            res = Math.sqrt(res)
+        else if (op[opCount]==="^")
+            res = res ** evaluate(digs[digCount])
         digCount++;
         opCount ++;
     }
