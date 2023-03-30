@@ -29,31 +29,78 @@ class App extends React.Component {
     }
 
     handleFunClick(val) {
-        this.state.sign.push(val);
-        this.state.nums.push([]);
-        this.state.inputSeq.push("o")
-        this.setState({
-            result: this.state.result.concat(val.toString())
-        });
+        const lenDig = this.state.nums.length;
+        if (this.state.nums[lenDig-1].length == 0)
+            return
+        else{            
+            let nums = this.state.nums.slice();
+            let sign = this.state.sign.slice();
+            let inputSeq = this.state.inputSeq.slice();
+
+            nums.push([]);
+            sign.push(val);
+            inputSeq.push("o");
+
+            this.setState({
+                nums: nums,
+                sign: sign,
+                result: this.state.result.concat(val.toString()),
+                inputSeq: inputSeq
+            });
+        }
     }
 
     handleDigitClick(val) {
-        this.state.nums[this.state.nums.length-1].push(val);
-        this.state.inputSeq.push("d")
-        this.setState({
-            result: this.state.result.concat(val.toString())
-        });
+        if (this.state.inputSeq.length == 0){
+            this.setState({
+                nums: [[val]],
+                result: val.toString()
+            });
+        }
+        else{
+            let nums = this.state.nums.slice();
+            let last = nums.pop();
+            last.push(val);
+            nums.push(last);
+
+            this.setState({
+                nums: nums,
+                result: this.state.result.concat(val.toString())
+            });
+        }
+        this.state.inputSeq.push("d");
     }
 
     handleDelClick() {
         const lastSeq = this.state.inputSeq.pop();
-        if (lastSeq === "o")
+        if (lastSeq === "o"){
             this.state.sign.pop();
-        else if (lastSeq === "d")
+            this.setState({
+                result: this.state.result.slice(0, -1),
+            });
+        }
+        else if (lastSeq === "d"){
             this.state.nums[this.state.nums.length-1].pop();
-        
+            this.setState({
+                result: this.state.result.slice(0, -1),
+            });
+        }
+        else
+            this.setState({
+                nums  : [[]],
+                sign  : [],
+                result:  "",
+                inputSeq: []
+            });
+    }
+
+    handleEqualClick() {
+        const res = evalEqual(this.state.nums, this.state.sign);
         this.setState({
-            result: this.state.result.slice(0, -1),
+            nums  : [[res]],
+            sign  : [],
+            result:  res.toString(),
+            inputSeq: []
         });
     }
 
@@ -87,7 +134,7 @@ class App extends React.Component {
                             )
                         }
                         <button 
-                            onClick={() => {console.log(`= clicked!`);}} 
+                            onClick={() => {this.handleEqualClick(this.state.nums, this.state.sign);}} 
                         >=</button>
                     </div>
                 </div>
@@ -100,3 +147,39 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render (        
     <App />
 );
+
+function evaluate(arr){
+    const len = arr.length;
+    const reverseArr = arr.reverse();
+    let res = 0;
+    for (let i = 0; i < len; i++){
+        res = res + reverseArr[i] * Math.pow(10,i);
+    }
+    return res;
+}
+
+function evalEqual(digs, op){
+    const lenDig = digs.length;
+    const lenOp = op.length;
+
+    let digCount = 1;
+    let opCount = 0;
+    let res = evaluate(digs[0]);
+    if (lenDig === 0) return;
+
+    while(digCount < lenDig && opCount < lenOp){
+        if (op[opCount]==="/")
+            res = res / evaluate(digs[digCount])
+        else if (op[opCount]==="x")
+            res = res * evaluate(digs[digCount])
+        else if (op[opCount]==="-")
+            res = res - evaluate(digs[digCount])
+        else if (op[opCount]==="+")
+            res = res + evaluate(digs[digCount])
+        
+        digCount++;
+        opCount ++;
+    }
+
+    return res;
+}
