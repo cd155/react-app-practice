@@ -29,7 +29,7 @@ class App extends React.Component {
 
     handleFunClick(val) {
         const lenDig = this.state.nums.length;
-        if (this.state.nums[lenDig-1].length == 0)
+        if (this.state.nums[lenDig-1].length === 0)
             return
         else{            
             let nums = this.state.nums.slice();
@@ -50,7 +50,7 @@ class App extends React.Component {
     }
 
     handleDigitClick(val) {
-        if (this.state.inputSeq.length == 0){
+        if (this.state.inputSeq.length === 0){
             this.setState({
                 nums: [[val]],
                 result: val.toString()
