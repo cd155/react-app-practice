@@ -5,7 +5,7 @@ The purpose of this repo is to practice react and javascript.
 ## Tic Tac Toe
 create a n by m tic tac toe game base the [Tutorial](https://reactjs.org/tutorial/tutorial.html)
 
-Here is the [demo](tictactoe.softifacts.com).
+Here is the [demo](http://tictactoe.softifacts.com).
 
 <img width="480" src="https://user-images.githubusercontent.com/16947266/220005114-984a2678-5211-4339-b1f9-d6940be7bc2e.gif">
 
@@ -25,6 +25,6 @@ simple display item with hard-coded data and fetch API
 ## Calculator
 a calculator with basic arithmetic functions
 
-Here is the [demo](calculator.softifacts.com).
+Here is the [demo](http://calculator.softifacts.com).
 
 <img src = "https://user-images.githubusercontent.com/16947266/228703573-740ddc51-9a4a-465c-88fc-773bbe24319d.gif">
