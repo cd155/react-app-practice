@@ -53,9 +53,6 @@ class Board extends React.Component {
 }
 
 class Game extends React.Component {
-    constructor(props){
-        super(props);
-    }
     
     // handle update when user click the button
     handleClick(i, j) {
